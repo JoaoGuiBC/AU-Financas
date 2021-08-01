@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+interface TransactionCardType {
+  type: 'deposit' | 'withdraw';
+}
+
 export const Container = styled.View`
   background: ${({ theme }) => theme.colors.shape};
 
@@ -15,9 +19,13 @@ export const Title = styled.Text`
   font-size: ${RFValue(14)}px;
 `;
 
-export const Amount = styled.Text`
+export const Amount = styled.Text<TransactionCardType>`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(20)}px;
+
+  color: ${({ theme, type }) =>
+    type === 'deposit' ? theme.colors.success : theme.colors.attention
+  };
 `;
 
 export const Footer = styled.View`

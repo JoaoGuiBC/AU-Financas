@@ -27,33 +27,36 @@ export const Dashboard: React.FC = () => {
   const data = [
     {
       id: '1',
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      type: 'deposit',
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
       category: {
         name: 'Vendas',
-        icon: 'dollar-sign'
+        icon: 'dollar-sign',
       },
-      date: "01/08/2021",
+      date: '01/08/2021',
     },
     {
       id: '2',
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      type: 'withdraw',
+      title: 'Aluguel da casa',
+      amount: 'R$ 1.200,00',
       category: {
-        name: 'Vendas',
-        icon: 'dollar-sign'
+        name: 'Casa',
+        icon: 'home',
       },
-      date: "01/08/2021",
+      date: '01/08/2021',
     },
     {
       id: '3',
-      title: "Desenvolvimento de site",
-      amount: "R$ 12.000,00",
+      type: 'withdraw',
+      title: 'Sushi',
+      amount: 'R$ 120,00',
       category: {
-        name: 'Vendas',
-        icon: 'dollar-sign'
+        name: 'Alimentação',
+        icon: 'coffee',
       },
-      date: "01/08/2021",
+      date: '01/08/2021',
     },
   ]
 

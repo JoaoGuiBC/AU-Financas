@@ -17,6 +17,7 @@ interface Category {
 }
 
 interface TransactionCardData {
+  type: 'deposit' | 'withdraw';
   title: string;
   amount: string;
   category: Category;
@@ -31,7 +32,10 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ data }) => {
   return (
     <Container>
       <Title>{data.title}</Title>
-      <Amount>{data.amount}</Amount>
+      <Amount type={data.type}>
+        {data.type === 'withdraw' && '- '}
+        {data.amount}
+      </Amount>
 
       <Footer>
         <Category>
