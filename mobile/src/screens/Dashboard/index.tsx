@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { HighlightCard } from '../../components/HighlightCard';
+
 import {
   Container,
   Header,
@@ -10,6 +12,7 @@ import {
   User,
   UserGreeting,
   UserName,
+  HighlightCards,
 } from './styles';
 
 export const Dashboard: React.FC = () => {
@@ -30,6 +33,15 @@ export const Dashboard: React.FC = () => {
 
         </UserWrapper>
       </Header>
+
+      <HighlightCards
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighlightCards>
 
     </Container>
   );
