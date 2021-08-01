@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { HighlightCard } from '../../components/HighlightCard';
+import { TransactionCard } from '../../components/TransactionCard';
 
 import {
   Container,
@@ -13,6 +14,8 @@ import {
   UserGreeting,
   UserName,
   HighlightCards,
+  Transactions,
+  Title,
 } from './styles';
 
 export const Dashboard: React.FC = () => {
@@ -57,6 +60,12 @@ export const Dashboard: React.FC = () => {
           type="total"
         />
       </HighlightCards>
+
+      <Transactions>
+        <Title>Listagem</Title>
+
+        <TransactionCard />
+      </Transactions>
 
     </Container>
   );

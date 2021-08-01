@@ -17,6 +17,10 @@ export const Container = styled.View<HighlightCardType>`
   padding: 19px 23px;
   padding-bottom: ${RFValue(42)}px;
   margin-right: 16px;
+  margin-bottom: 4px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  elevation: 3;
 `;
 
 export const Header = styled.View`
