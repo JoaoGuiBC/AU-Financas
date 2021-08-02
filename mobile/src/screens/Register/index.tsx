@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Input } from '../../components/Form/Input';
+import { Button } from '../../components/Form/Button';
 
 import {
   Container,
   Header,
   Title,
   Form,
+  Fields,
 } from './styles';
 
 const Register: React.FC = () => {
@@ -17,13 +19,16 @@ const Register: React.FC = () => {
       </Header>
 
       <Form>
-        <Input
-          placeholder="Nome"
-        />
+        <Fields>
+          <Input
+            placeholder="Nome"
+          />
+          <Input
+            placeholder="Preço"
+          />
+        </Fields>
 
-        <Input
-          placeholder="Preço"
-        />
+        <Button title="Enviar" />
       </Form>
     </Container>
   );
