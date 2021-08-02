@@ -12,7 +12,7 @@ import {
   Fields,
   TransactionTypes,
 } from './styles';
-import { CategorySelect } from '../../components/Form/CategorySelect';
+import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
 
 const Register: React.FC = () => {
   const [selectedTransactionType, setSelectedTransactionType] = useState('');
@@ -47,7 +47,7 @@ const Register: React.FC = () => {
             />
           </TransactionTypes>
 
-          <CategorySelect title="Categoria" />
+          <CategorySelectButton title="Categoria" />
         </Fields>
 
         <Button title="Enviar" />

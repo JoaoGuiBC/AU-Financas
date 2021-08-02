@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Container, CategoryTitle, Icon } from './styles';
 
-interface CategorySelectProps {
+interface CategorySelectButtonProps {
   title: string;
 }
 
-const CategorySelect: React.FC<CategorySelectProps> = ({ title }) => {
+const CategorySelectButton: React.FC<CategorySelectButtonProps> = ({ title }) => {
   return (
     <Container activeOpacity={0.5}>
       <CategoryTitle>{title}</CategoryTitle>
@@ -15,4 +15,4 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ title }) => {
   );
 }
 
-export { CategorySelect };
+export { CategorySelectButton };
