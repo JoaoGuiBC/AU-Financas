@@ -32,6 +32,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   setCategory,
   closeSelectCategory,
 }) => {
+
   return (
     <Container>
       <Header>

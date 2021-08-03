@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native';
-import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface IconType {
   type: 'deposit' | 'withdraw';
@@ -12,7 +12,7 @@ interface ContainerProps {
   type: 'deposit' | 'withdraw';
 }
 
-export const Container = styled(TouchableOpacity)<ContainerProps>`
+export const Container = styled(RectButton)<ContainerProps>`
   width: 48%;
 
   flex-direction: row;
@@ -20,9 +20,6 @@ export const Container = styled(TouchableOpacity)<ContainerProps>`
   justify-content: center;
 
   border-radius: 5px;
-  border: ${({ theme, isActive }) =>
-    isActive ? 'none' : `1.5px solid ${theme.colors.text}`
-  };
 
   padding: 16px;
 

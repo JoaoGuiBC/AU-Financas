@@ -1,17 +1,19 @@
 import React from 'react';
-import { TouchableOpacityProps } from 'react-native';
+import { TouchableWithoutFeedback, TouchableWithoutFeedbackProps } from 'react-native';
 
 import { Container, Title } from './styles';
 
-interface ButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends TouchableWithoutFeedbackProps {
   title: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ title, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, ...rest }) => {
   return (
-    <Container {...rest} activeOpacity={0.8}>
-      <Title>{title}</Title>
-    </Container>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <Container {...rest} activeOpacity={0.8}>
+        <Title>{title}</Title>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
 
