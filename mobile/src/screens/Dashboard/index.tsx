@@ -13,6 +13,7 @@ import {
   User,
   UserGreeting,
   UserName,
+  LogoutButton,
   HighlightCards,
   Transactions,
   Title,
@@ -73,7 +74,9 @@ export const Dashboard: React.FC = () => {
               <UserName>Jonas</UserName>
             </User>
           </UserInfo>
-          <Icon name="power" />
+          <LogoutButton onPress={() => {}}>
+            <Icon name="power" />
+          </LogoutButton>
 
         </UserWrapper>
       </Header>
