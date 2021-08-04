@@ -60,7 +60,7 @@ const Register: React.FC = () => {
       return Alert.alert('Selecione a categoria da transação');
     }
 
-    const data = {
+    const newTransaction = {
       name: form.name,
       amount: form.amount,
       selectedTransactionType,
@@ -68,6 +68,14 @@ const Register: React.FC = () => {
     }
 
     try {
+      const storagedData = await AsyncStorage.getItem('@aufinancas:transactions');
+      const parsedStoragedData = storagedData ? JSON.parse(storagedData) : [];
+
+      const data = [
+        ...parsedStoragedData,
+        newTransaction
+      ]
+
       AsyncStorage.setItem('@aufinancas:transactions', JSON.stringify(data));
     } catch (error) {
       console.log(error);
