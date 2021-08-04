@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+import { useTheme } from 'styled-components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { HighlightCard } from '../../components/HighlightCard';
@@ -19,6 +21,7 @@ import {
   Transactions,
   Title,
   TransactionsList,
+  LoadContainer,
 } from './styles';
 
 export interface DataListProps extends TransactionCardData {
@@ -36,18 +39,11 @@ interface HighlightData {
 }
 
 export const Dashboard: React.FC = () => {
+  const [isAsyncStorageLoading, setIsAsyncStorageloading] = useState(true);
   const [transactions, setTransactions] = useState<DataListProps[]>([]);
-  const [highlightData, setHighlightData] = useState<HighlightData>({
-    entries: {
-      amount: "R$ 0"
-    },
-    expenses: {
-      amount: "R$ 0"
-    },
-    total: {
-      amount: "R$ 0"
-    },
-  } as HighlightData);
+  const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
+
+  const { colors } = useTheme();
 
   async function loadTransactions() {
     const response = await AsyncStorage.getItem('@aufinancas:transactions');
@@ -108,7 +104,7 @@ export const Dashboard: React.FC = () => {
     });
     setTransactions(formattedData);
 
-    console.log(highlightData);
+    setIsAsyncStorageloading(false);
   }
 
   useEffect(() => {
@@ -117,58 +113,67 @@ export const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <UserWrapper>
-          <UserInfo>
-            <Photo
-              source={{ uri: 'https://avatars.githubusercontent.com/u/64855040?v=4' }}
-            />
-            <User>
-              <UserGreeting>Olá, </UserGreeting>
-              <UserName>Jonas</UserName>
-            </User>
-          </UserInfo>
-          <LogoutButton onPress={() => {}}>
-            <Icon name="power" />
-          </LogoutButton>
+      {
+        isAsyncStorageLoading ? (
+          <LoadContainer>
+            <ActivityIndicator color={colors.primary} size="large" />
+          </LoadContainer>
+        ) : (
+          <>
+            <Header>
+              <UserWrapper>
+                <UserInfo>
+                  <Photo
+                    source={{ uri: 'https://avatars.githubusercontent.com/u/64855040?v=4' }}
+                  />
+                  <User>
+                    <UserGreeting>Olá, </UserGreeting>
+                    <UserName>Jonas</UserName>
+                  </User>
+                </UserInfo>
+                <LogoutButton onPress={() => { }}>
+                  <Icon name="power" />
+                </LogoutButton>
 
-        </UserWrapper>
-      </Header>
+              </UserWrapper>
+            </Header>
 
-      <HighlightCards
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        <HighlightCard
-          title="Entradas"
-          amount={highlightData.entries.amount}
-          lastTransaction="Última entrada dia 13 de abril"
-          type="deposit"
-        />
-        <HighlightCard
-          title="Saídas"
-          amount={highlightData.expenses.amount}
-          lastTransaction="Última saída dia 03 de abril"
-          type="withdraw"
-        />
-        <HighlightCard
-          title="Total"
-          amount={highlightData.total.amount}
-          lastTransaction="01 á 16 de abril"
-          type="total"
-        />
-      </HighlightCards>
+            <HighlightCards
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            >
+              <HighlightCard
+                title="Entradas"
+                amount={highlightData.entries.amount}
+                lastTransaction="Última entrada dia 13 de abril"
+                type="deposit"
+              />
+              <HighlightCard
+                title="Saídas"
+                amount={highlightData.expenses.amount}
+                lastTransaction="Última saída dia 03 de abril"
+                type="withdraw"
+              />
+              <HighlightCard
+                title="Total"
+                amount={highlightData.total.amount}
+                lastTransaction="01 á 16 de abril"
+                type="total"
+              />
+            </HighlightCards>
 
-      <Transactions>
-        <Title>Listagem</Title>
+            <Transactions>
+              <Title>Listagem</Title>
 
-        <TransactionsList
-          data={transactions}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => <TransactionCard data={item} />}
-        />
-      </Transactions>
-
+              <TransactionsList
+                data={transactions}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => <TransactionCard data={item} />}
+              />
+            </Transactions>
+          </>
+        )
+      }
     </Container>
   );
 }
