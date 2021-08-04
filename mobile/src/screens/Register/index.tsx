@@ -68,7 +68,7 @@ const Register: React.FC = () => {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      selectedTransactionType,
+      type: selectedTransactionType,
       category: category.key,
       date: new Date(),
     }

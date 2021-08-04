@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import { TransactionCard, TransactionCardData } from '../../components/TransactionCard';
@@ -25,41 +26,40 @@ export interface DataListProps extends TransactionCardData {
 }
 
 export const Dashboard: React.FC = () => {
-  const data = [
-    {
-      id: '1',
-      type: 'deposit',
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
-      category: {
-        name: 'Vendas',
-        icon: 'dollar-sign',
-      },
-      date: '01/08/2021',
-    },
-    {
-      id: '2',
-      type: 'withdraw',
-      title: 'Aluguel da casa',
-      amount: 'R$ 1.200,00',
-      category: {
-        name: 'Casa',
-        icon: 'home',
-      },
-      date: '01/08/2021',
-    },
-    {
-      id: '3',
-      type: 'withdraw',
-      title: 'Sushi',
-      amount: 'R$ 120,00',
-      category: {
-        name: 'Alimentação',
-        icon: 'coffee',
-      },
-      date: '01/08/2021',
-    },
-  ]
+  const [transactions, setTransactions] = useState<DataListProps[]>([]);
+
+  useEffect(() => {
+    async function loadTransactions() {
+      const response = await AsyncStorage.getItem('@aufinancas:transactions');
+      const data = response ? JSON.parse(response) : [];
+
+      const formattedData: DataListProps[] = data.map((transaction: DataListProps) => {
+        const amount = Number(transaction.amount).toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL'
+        });
+
+        const date = Intl.DateTimeFormat('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit',
+        }).format(new Date(transaction.date));
+
+        return {
+          id: transaction.id,
+          name: transaction.name,
+          amount,
+          type: transaction.type,
+          category: transaction.category,
+          date,
+        }
+      });
+
+      return setTransactions(formattedData);
+    }
+    
+    loadTransactions();
+  }, []);
 
   return (
     <Container>
@@ -109,7 +109,7 @@ export const Dashboard: React.FC = () => {
         <Title>Listagem</Title>
 
         <TransactionsList
-          data={data}
+          data={transactions}
           keyExtractor={item => item.id}
           renderItem={({ item }) => <TransactionCard data={item} />}
         />
