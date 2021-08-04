@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import uuid from 'react-native-uuid';
 import {
   Keyboard,
   Modal,
@@ -48,7 +50,9 @@ const Register: React.FC = () => {
     name: 'Categoria',
   });
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const navigation = useNavigation();
+
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
@@ -61,10 +65,12 @@ const Register: React.FC = () => {
     }
 
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       selectedTransactionType,
       category: category.key,
+      date: new Date(),
     }
 
     try {
@@ -76,7 +82,17 @@ const Register: React.FC = () => {
         newTransaction
       ]
 
-      AsyncStorage.setItem('@aufinancas:transactions', JSON.stringify(data));
+      await AsyncStorage.setItem('@aufinancas:transactions', JSON.stringify(data));
+
+      reset();
+      setSelectedTransactionType('');
+      setCategory({
+        key: 'category',
+        name: 'Categoria',
+      });
+
+      navigation.goBack();
+
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível salvar')
