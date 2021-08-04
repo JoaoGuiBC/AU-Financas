@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Keyboard,
   Modal,
@@ -51,7 +52,7 @@ const Register: React.FC = () => {
     resolver: yupResolver(schema)
   });
 
-  function handleRegister(form: FormData) {
+  async function handleRegister(form: FormData) {
     if (!selectedTransactionType) {
       return Alert.alert('Selecione o tipo da transação');
     }
@@ -66,7 +67,12 @@ const Register: React.FC = () => {
       category: category.key,
     }
 
-    console.log(data)
+    try {
+      AsyncStorage.setItem('@aufinancas:transactions', JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível salvar')
+    }
   }
 
   return (
