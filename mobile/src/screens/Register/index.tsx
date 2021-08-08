@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import uuid from 'react-native-uuid';
 import {
   Keyboard,
@@ -28,6 +29,16 @@ import {
   TransactionTypes,
 } from './styles';
 
+type RootStackParamList = {
+  Cadastrar: undefined;
+  Listagem: undefined;
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Cadastrar'
+>;
+
 interface FormData {
   name: string;
   amount: string;
@@ -50,7 +61,7 @@ const Register: React.FC = () => {
     name: 'Categoria',
   });
 
-  const navigation = useNavigation();
+  const { navigate } = useNavigation<HomeScreenNavigationProp>();
 
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -73,6 +84,8 @@ const Register: React.FC = () => {
       date: new Date(),
     }
 
+    navigate('Listagem');
+
     try {
       const storagedData = await AsyncStorage.getItem('@aufinancas:transactions');
       const parsedStoragedData = storagedData ? JSON.parse(storagedData) : [];
@@ -90,8 +103,6 @@ const Register: React.FC = () => {
         key: 'category',
         name: 'Categoria',
       });
-
-      navigation.goBack();
 
     } catch (error) {
       console.log(error);
