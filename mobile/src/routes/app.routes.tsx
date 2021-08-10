@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Dashboard } from '../screens/Dashboard';
 import { Register } from '../screens/Register';
+import { Resume } from '../screens/Resume';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -45,6 +46,19 @@ const AppRoutes: React.FC = () => {
           tabBarIcon: (({ size, color }) => (
             <Feather
               name="dollar-sign"
+              size={size}
+              color={color}
+            />
+          ))
+        }}
+      />
+      <Screen
+        name="Resumo"
+        component={Resume}
+        options={{
+          tabBarIcon: (({ size, color }) => (
+            <Feather
+              name="pie-chart"
               size={size}
               color={color}
             />
