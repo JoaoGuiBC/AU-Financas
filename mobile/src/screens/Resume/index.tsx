@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
 import { HistoryCard } from '../../components/HistoryCard';
@@ -88,7 +89,12 @@ const Resume: React.FC = () => {
         <Title>Resumo por categoria</Title>
       </Header>
 
-      <Content contentContainerStyle={{ flex: 1, padding: 24 }}>
+      <Content
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+        }}
+      >
         <ChartContainer>
           <VictoryPie
             data={categoriesTotal}
