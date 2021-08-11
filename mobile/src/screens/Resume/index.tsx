@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { VictoryPie } from 'victory-native';
 import { addMonths, format, subMonths } from 'date-fns';
+import { useFocusEffect } from '@react-navigation/native';
 import { ptBR } from 'date-fns/locale';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -106,6 +107,10 @@ const Resume: React.FC = () => {
   useEffect(() => {
     loadData();
   }, [selectedDate]);
+
+  useFocusEffect(useCallback(() => {
+    loadData();
+  }, []));
 
   return (
     <Container>

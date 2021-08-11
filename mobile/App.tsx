@@ -33,7 +33,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <StatusBar style="auto" />
+          <StatusBar style="inverted" />
           <AppRoutes />
         </NavigationContainer>
       </ThemeProvider>

@@ -84,8 +84,6 @@ const Register: React.FC = () => {
       date: new Date(),
     }
 
-    navigate('Listagem');
-
     try {
       const storagedData = await AsyncStorage.getItem('@aufinancas:transactions');
       const parsedStoragedData = storagedData ? JSON.parse(storagedData) : [];
@@ -103,6 +101,8 @@ const Register: React.FC = () => {
         key: 'category',
         name: 'Categoria',
       });
+
+      navigate('Listagem');
 
     } catch (error) {
       console.log(error);
