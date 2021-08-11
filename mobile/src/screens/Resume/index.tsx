@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { VictoryPie } from 'victory-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
 import { HistoryCard } from '../../components/HistoryCard';
@@ -13,6 +12,10 @@ import {
   Header,
   Title,
   Content,
+  SelectMonth,
+  SelectMonthButton,
+  Icon,
+  Month,
   ChartContainer,
 } from './styles';
 
@@ -95,6 +98,18 @@ const Resume: React.FC = () => {
           paddingHorizontal: 24,
         }}
       >
+        <SelectMonth>
+          <SelectMonthButton>
+            <Icon name="chevron-left" />
+          </SelectMonthButton>
+
+          <Month>Agosto</Month>
+
+          <SelectMonthButton>
+            <Icon name="chevron-right" />
+          </SelectMonthButton>
+        </SelectMonth>
+
         <ChartContainer>
           <VictoryPie
             data={categoriesTotal}
