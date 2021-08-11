@@ -41,15 +41,13 @@ interface CategoryData {
 }
 
 const Resume: React.FC = () => {
-  const [isCategoryDataLoading, setIsCategoryDataLoading] = useState(true);
+  const [isCategoryDataLoading, setIsCategoryDataLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [categoriesTotal, setCategoriesTotal] = useState<CategoryData[]>([]);
 
   const { colors } = useTheme();
 
   function handleUpdateDate(action: 'next' | 'previous') {
-    setIsCategoryDataLoading(true);
-
     if (action === 'next') {
       setSelectedDate(addMonths(selectedDate, 1));
     } else {
@@ -58,6 +56,8 @@ const Resume: React.FC = () => {
   }
 
   async function loadData() {
+    setIsCategoryDataLoading(true);
+
     const response = await AsyncStorage.getItem('@aufinancas:transactions');
     const data: TransactionData[] = response ? JSON.parse(response) : [];
 
@@ -104,13 +104,9 @@ const Resume: React.FC = () => {
     setIsCategoryDataLoading(false);
   }
 
-  useEffect(() => {
-    loadData();
-  }, [selectedDate]);
-
   useFocusEffect(useCallback(() => {
     loadData();
-  }, []));
+  }, [selectedDate]));
 
   return (
     <Container>
