@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "AUFinancas",
+    "slug": "AUFinancas",
+    "scheme": "aufinancas",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": ""
   },
-  "name": "mobile"
+  "name": "A&U Finanças",
+  "displayName": "A&U Finanças"
 }
