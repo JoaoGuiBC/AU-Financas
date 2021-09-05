@@ -10,7 +10,7 @@ export const Header = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   
   height: 12.5rem;
-  padding: 2rem 10rem;
+  padding: 2rem 8rem;
 `;
 
 export const UserInfo = styled.div`
@@ -50,3 +50,12 @@ export const LogoutButton = styled.button`
 `;
 
 export const Content = styled.div``;
+
+export const HighlightCardsContainer = styled.div`
+  display: flex;
+
+  justify-content: space-between;
+  padding: 0 8rem;
+
+  transform: translateY(-50%);
+`;

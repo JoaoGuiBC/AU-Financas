@@ -1,4 +1,5 @@
 import { FiPower } from 'react-icons/fi';
+import { HighlightCard } from '../components/HighlightCard';
 
 import {
   Container,
@@ -8,6 +9,7 @@ import {
   UserGreetings,
   LogoutButton,
   Content,
+  HighlightCardsContainer,
 } from './styles';
 
 const Home: React.FC = () => {
@@ -28,7 +30,11 @@ const Home: React.FC = () => {
       </Header>
 
       <Content>
-        <div>cards</div>
+        <HighlightCardsContainer>
+          <HighlightCard type='deposit' value='R$ 17.400,00' />
+          <HighlightCard type='withdraw' value='R$ 1.259,00' />
+          <HighlightCard type='total' value='R$ 16.141,00' />
+        </HighlightCardsContainer>
         <div>grid</div>
       </Content>
     </Container>
